@@ -1,26 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import ContextPlanets from '../context/ContextPlanets';
+import FilterColumn from './FiltersColumn';
+import FilterName from './FilterName';
 
 function Table() {
-  const [searchName, setSearchName] = useState('');
   const { planetsTab } = useContext(ContextPlanets);
-  const filteringName = planetsTab.filter((value) => value.name.includes(searchName));
   const title = ['Name', 'Rotation Period', 'Orbital Period', 'Diameter',
     'Climate', 'Gravity', 'Terrain', 'Surface Water', 'Population', 'Films',
     'Created', 'Edited', 'URL'];
   return (
     <>
-      <label htmlFor="searchName">
-        <input
-          name="searchName"
-          id="searchName"
-          type="search"
-          data-testid="name-filter"
-          value={ searchName }
-          onChange={ (e) => setSearchName(e.target.value) }
-        />
-      </label>
+      <FilterName />
+      <FilterColumn />
       <table>
         <thead>
           <tr>
@@ -37,8 +29,8 @@ function Table() {
         </thead>
         <tbody>
           {
-            filteringName.map((item, index) => (
-              <tr key={ index }>
+            planetsTab.map((item, index) => (
+              <tr data-testid="planet-name" key={ index }>
                 <td>{item.name}</td>
                 <td>{item.rotation_period}</td>
                 <td>{item.orbital_period}</td>

@@ -4,18 +4,19 @@ import ContextPlanets from './ContextPlanets';
 
 function Provider({ children }) {
   const [planets, setPlanets] = useState([]);// array original
-  const [planetsTab, setPlanetsTab] = useState([]); // array clone para tabela
+  const [planetsTab, setPlanetsTab] = useState([]);
+  const [filterByNumericValues, setfilterByNumericValues] = useState([]);
 
   useEffect(() => {
     const starWarsAPI = async () => {
-      const chaticeDoLinte = -1;
+      const magicNumber = -1;
       const request = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
       const data = await request.json();
       const { results } = data;
       console.log(results);
       const newData = results.filter((value) => delete value.residents);
       console.log(newData);
-      const sortData = newData.sort((a, b) => (a.name > b.name ? 1 : chaticeDoLinte));
+      const sortData = newData.sort((a, b) => (a.name > b.name ? magicNumber : 1));
       setPlanets(sortData);
       setPlanetsTab(sortData);
     };
@@ -23,8 +24,35 @@ function Provider({ children }) {
   }, []);
   console.log(planets);
 
+  useEffect(() => {
+    let filtrado = [...planets];
+    filterByNumericValues.forEach(({ column, comparison, value }) => {
+      if (comparison === 'maior que') {
+        const maiorQ = filtrado
+          .filter((item) => Number(item[column]) > Number(value));
+        filtrado = [...maiorQ];
+      }
+      if (comparison === 'menor que') {
+        const menorQ = filtrado
+          .filter((item) => Number(item[column]) < Number(value));
+        filtrado = [...menorQ];
+      }
+      if (comparison === 'igual a') {
+        const igualA = filtrado
+          .filter((item) => Number(item[column]) === Number(value));
+        filtrado = [...igualA];
+      }
+    });
+    console.log(filtrado);
+    setPlanetsTab(filtrado);
+  }, [filterByNumericValues]);
+
   const stateOfContext = {
+    planets,
     planetsTab,
+    setPlanetsTab,
+    setfilterByNumericValues,
+    filterByNumericValues,
   };
   return (
     <ContextPlanets.Provider value={ stateOfContext }>
