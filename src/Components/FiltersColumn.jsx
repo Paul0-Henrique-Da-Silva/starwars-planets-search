@@ -13,6 +13,12 @@ function FilterColumn() {
     value: 0,
   });
 
+  const removefiltro = (column) => {
+    const novoA = filterByNumericValues.filter((value) => value.column !== column);
+    setfilterByNumericValues(novoA);
+    setNewColumnArray([...neWcolumnArray, column]);
+  };
+
   const handlyChange = () => {
     setfilterByNumericValues([...filterByNumericValues, state]);
     const targeting = state.column;
@@ -64,6 +70,12 @@ function FilterColumn() {
       >
         filter
       </button>
+      {filterByNumericValues.map((value, index) => (
+        <div data-testid="filter" key={ index }>
+          <span>{`${value.column} | ${value.comparison} | ${value.value}`}</span>
+          <button type="button" onClick={ () => removefiltro(value.column) }>X</button>
+        </div>
+      ))}
     </div>
   );
 }
