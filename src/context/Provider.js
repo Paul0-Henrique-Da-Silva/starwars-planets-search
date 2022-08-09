@@ -16,7 +16,7 @@ function Provider({ children }) {
       console.log(results);
       const newData = results.filter((value) => delete value.residents);
       console.log(newData);
-      const sortData = newData.sort((a, b) => (a.name > b.name ? magicNumber : 1));
+      const sortData = newData.sort((a, b) => (a.name > b.name ? 1 : magicNumber));
       setPlanets(sortData);
       setPlanetsTab(sortData);
     };

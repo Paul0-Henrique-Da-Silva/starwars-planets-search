@@ -30,8 +30,8 @@ function Table() {
         <tbody>
           {
             planetsTab.map((item, index) => (
-              <tr data-testid="planet-name" key={ index }>
-                <td>{item.name}</td>
+              <tr key={ index }>
+                <td data-testid="planet-name">{item.name}</td>
                 <td>{item.rotation_period}</td>
                 <td>{item.orbital_period}</td>
                 <td>{item.diameter}</td>
