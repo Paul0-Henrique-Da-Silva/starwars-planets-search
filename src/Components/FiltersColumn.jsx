@@ -13,6 +13,11 @@ function FilterColumn() {
     value: 0,
   });
 
+  const rmAll = () => {
+    setfilterByNumericValues([]);
+    setNewColumnArray(columnArray);
+  };
+
   const removefiltro = (column) => {
     const novoA = filterByNumericValues.filter((value) => value.column !== column);
     setfilterByNumericValues(novoA);
@@ -69,6 +74,9 @@ function FilterColumn() {
         onClick={ handlyChange }
       >
         filter
+      </button>
+      <button data-testid="button-remove-filters" type="button" onClick={ rmAll }>
+        Remover todos filtros.
       </button>
       {filterByNumericValues.map((value, index) => (
         <div data-testid="filter" key={ index }>
