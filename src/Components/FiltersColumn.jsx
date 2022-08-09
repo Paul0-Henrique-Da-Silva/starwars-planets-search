@@ -108,7 +108,7 @@ function FilterColumn() {
         filter
       </button>
       <button data-testid="button-remove-filters" type="button" onClick={ rmAll }>
-        Remover todos filtros.
+        Remover todos filtros
       </button>
       {/* seletor de filtro asc e des */}
       <section>
