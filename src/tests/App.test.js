@@ -67,9 +67,9 @@ describe('', () => {
 
     userEvent.click(RM_ALL)
 
-    const planets1 = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
+    const planets_DUPLI = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
 
-    expect(planets1).toHaveLength(10)
+    expect(planets_DUPLI).toHaveLength(10)
     expect(COLUMN).toHaveLength(5)
   })
   it('Remover filtro individual', async () => {
@@ -91,7 +91,7 @@ describe('', () => {
     userEvent.click(RM_ALL)
     expect(RM_ALL).toBeTruthy()
   })
-  it('Testa se não há filtros repetidos', async () => {
+  it('Não há filtros repetidos', async () => {
     render(<App />)
 
     const COLUMN = screen.getByTestId('column-filter')
