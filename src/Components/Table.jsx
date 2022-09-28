@@ -18,11 +18,7 @@ function Table() {
           <tr>
             {
               title.map((value, index) => (
-                <th key={ index }>
-                  {' '}
-                  { value }
-                  {' '}
-                </th>
+                <th key={ index }> { value } </th>
               ))
             }
           </tr>

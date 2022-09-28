@@ -50,6 +50,8 @@ function FilterColumn() {
     setNewColumnArray(columnArray);
   };
 
+  // remove um filtro[{column, comparison, value}] de array de 
+  // filtro(filterByNumericValues), devolve a coluna removida para array de coluna
   const removefiltro = (column) => {
     const novoA = filterByNumericValues.filter((value) => value.column !== column);
     setfilterByNumericValues(novoA);
